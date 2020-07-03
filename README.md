@@ -1,7 +1,9 @@
-Guia de como transitar informações via Iframe
+# Guia de como transitar informações via Iframe
 
 Para transitar informações via iframes iremos utilizar a API [postMessage](https://developer.mozilla.org/pt-PT/docs/Web/API/Window/postMessage), esse método permite a configuração segura de origem cruzada, ou seja, iremos enfiar a informação do código renderizado da tag iframe para o navegador que está o renderizando.
-`src/index.html` 
+
+Este é o arquivo que renderiza o iframe `src/index.html`, criamos uma escuta para que toda vez o evento do tipo `message` seja disparado ao receber o evento disparamos a propriedade `data` diretamente para o `dataLayer`
+
 ``` html
  <iframe src="iframe.html"></iframe>
     <script>
@@ -16,6 +18,8 @@ Para transitar informações via iframes iremos utilizar a API [postMessage](htt
         }
     </script>
 ```
+
+Este é o arquivo iframe que contém o formulário, nele adicionamos uma escuta para quando o famulário for submetido seja disparado através do método `postMessage` contido na propriedade `parent` 
 ``` html
     <form action="POST" id="myForm" onsubmit="">
         <input type="text" name="email" />
@@ -24,7 +28,7 @@ Para transitar informações via iframes iremos utilizar a API [postMessage](htt
 
 
     <script type="text/javascript">
-		document.getElementById("myForm").onsubmit = (e) => {
+	document.getElementById("myForm").onsubmit = (e) => {
             e.preventDefault()
             parent.postMessage({"event": 'test'}, "http://localhost:8080")
         }
@@ -32,7 +36,3 @@ Para transitar informações via iframes iremos utilizar a API [postMessage](htt
     </script>
 ```
 
-Quando efetuamos o submit de um form por via de iframe temos que captar o evento via dataLayer, com um evento personalizado. 
-Fazendo que os 2 navegadores se conversem o do iframe e o da url acessada.
-Assim que demos submit no formulário faremos com que o navegador do iframe envie uma mensagem com o evento, para o navegador da página que estamos acessando.
-O navegador interpreta e válida a menssagem e cria o evento personalizado via dataLayer com o método addEventListener e assim conseguimos implementar no gtm.
