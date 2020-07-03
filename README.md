@@ -19,7 +19,7 @@ Este é o arquivo que renderiza o iframe `src/index.html`, criamos uma escuta pa
     </script>
 ```
 
-Este é o arquivo iframe que contém o formulário, nele adicionamos uma escuta para quando o famulário for submetido seja disparado através do método `postMessage` contido na propriedade `parent` 
+Este é o arquivo iframe `src/iframe.html` que contém o formulário, nele adicionamos uma escuta para quando o famulário for submetido seja disparado através do método `postMessage` contido na propriedade `parent` 
 ``` html
     <form action="POST" id="myForm" onsubmit="">
         <input type="text" name="email" />
