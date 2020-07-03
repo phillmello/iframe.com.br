@@ -35,4 +35,4 @@ Este é o arquivo iframe `src/iframe.html` que contém o formulário, nele adici
 
     </script>
 ```
-
+Para facilitar a leitura e o entedimento do que tem que ser feito, deixamos configurados um node com servidor local para poder testar localmente, ao baixar o repositório execute `npm install` e logo após `node index.js`
